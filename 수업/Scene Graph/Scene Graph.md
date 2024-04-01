@@ -1,2 +1,6 @@
 ## 실행결과
-https://github.com/gryrryfh/AI-Graphics/assets/50912987/66ea89e0-e37a-4913-89f8-46bf6ab9451f
+
+
+
+https://github.com/gryrryfh/AI-Graphics/assets/50912987/89d5a15c-8571-4224-9c1a-1ed0a6ddfac2
+
