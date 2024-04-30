@@ -38,7 +38,3 @@ function MyElement3D(){
 export default MyElement3D
 ```
 
-  
-  )
-}
-```
