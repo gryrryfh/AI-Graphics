@@ -398,3 +398,282 @@ function MyElement3D() {
 
 export default MyElement3D
 ```
+## MeshreflectorMaterial
+```javascript
+import { Box, OrbitControls, MeshReflectorMaterial} from "@react-three/drei"
+import { useEffect, useRef } from "react"
+import { useControls } from "leva"
+import * as THREE from "three"
+
+function MyElement3D(){
+
+  return(
+
+  <>
+  <OrbitControls />
+  <ambientLight intensitiy={0.5} />
+  <directionalLight position={[0, 1, 0]}/>
+  <directionalLight position={[1, 2, 8]} intensity={0.7}/>
+
+  <mesh position={[0, -0.6, 0]} rotation= {[-Math.PI /2, 0, 0]}>
+    <planeGeometry args={[10, 10]}/>
+    <MeshReflectorMaterial
+    blur={[300, 100]}
+    resolution={2048}
+    mixBlur={1}
+    mixStrength={30}
+    roughness={0.9}
+    depthScale={.7}
+    minDepthThreshold={0.5}
+    maxDepthThreshold={1.4}
+    color="#050505"
+    metalness={0.5}
+    />
+  </mesh>
+
+  <mesh position={[0, 0, 0]}>
+    <boxGeometry />
+    <meshStandardMaterial color="cyan"/>
+  </mesh>
+  </>
+  )
+}
+export default MyElement3D
+```
+
+## meshreFractionMaterial
+```javascript
+import { Box, OrbitControls, MeshRefractionMaterial, CubeCamera} from "@react-three/drei"
+
+import {RGBELoader} from 'three-stdlib'
+import {useLoader} from "@react-three/fiber"
+
+
+function MyElement3D(){
+const texture = useLoader (RGBELoader,'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr')
+  return(
+
+  <>
+  <OrbitControls />
+  <ambientLight intensitiy={0.2} />
+  <directionalLight position={[0, 1, 0]}/>
+  <directionalLight position={[1, 2, 8]} intensity={0.7}/>
+
+  <CubeCamera resolution={1024} frames={1} envMap = {texture}>
+{(texture) => (
+   <mesh>
+  <dodecahedronGeometry/>
+  <MeshRefractionMaterial
+  
+  envMap={texture}
+  toneMapped={false}
+  bounces={2}
+  aberrationStrength={0.03}
+  ior={2.75}
+  fresnel={1}
+  color='white'
+  fastChroma={true}
+  />  
+  </mesh>)}
+</CubeCamera>
+ 
+
+  </>
+  )
+}
+export default MyElement3D
+```
+
+## MeshTransmissionMaterial
+```javascript
+import { Box, OrbitControls, MeshTransmissionMaterial, CubeCamera} from "@react-three/drei"
+import {useControls} from "leva"
+import {RGBELoader} from 'three-stdlib'
+import {useLoader} from "@react-three/fiber"
+import { clearcoat, ior } from "three/examples/jsm/nodes/core/PropertyNode.js"
+import * as THREE from "three"
+
+function MyElement3D(){
+
+  const config = useControls({
+    transmissionSampler: false,
+    backside: false,
+    samples: {value: 10, min: 1, max: 32, step: 1},
+    resolution: {value: 2048, min : 256, max: 2048, step: 256},
+    transmission: {value:1, min: 0, max: 1},
+    roughness: {value:0.0, min: 0, max: 1, step: 0.01},
+    thickness: {value: 3.5, min:0, max: 10, step: 0.01},
+    ior: {value: 1.5, min: 1, max: 5, step: 0.01},
+    chromaticAberration: {value: 0.06, min: 0, max: 0.1},
+    anisotropy: {value: 0.1, min: 0, max: 1, step: 0.01},
+    distortion: {value: 0.0, min: 0, max: 1, step: 0.01},
+    distortionScale: {value: 0.3, min: 0.01, max: 1, step: 0.01},
+    temporalDistortion: {value: 0.5, min: 0, max: 1, step: 0.01},
+    clearcoat: {value: 0, min: 0, max: 1},
+    attenuationDistance: {value: 0.5, min: 0, max: 10, step: 0.01},
+    attenuationColor: "#ffffff",
+    color: "#c9ffal",
+    bg: "#839681",
+
+  })
+  return(
+
+  <>
+  <OrbitControls />
+  <ambientLight intensitiy={0.2} />
+  <directionalLight position={[0, 1, 0]}/>
+  <directionalLight position={[1, 2, 8]} intensity={0.7}/>
+
+<mesh>
+  <sphereGeometry args={[1, 128, 128]} />
+  <MeshTransmissionMaterial
+  {...config} background={new THREE.Color(config.bg)}/>
+</mesh>
+
+<mesh scale={0.3}>
+  <torusGeometry args={[0.5, 0.2, 32]}/>
+  <meshStandardMaterial />
+</mesh>
+ 
+
+  </>
+  )
+}
+export default MyElement3D
+```
+
+## MeshWobbleMaterial
+```javascript
+import { MeshWobbleMaterial, OrbitControls} from "@react-three/drei"
+
+
+function MyElement3D(){
+
+  
+  
+  return(
+
+  <>
+  <OrbitControls />
+  <ambientLight intensitiy={0.2} />
+  <directionalLight position={[0, 1, 0]}/>
+  <directionalLight position={[1, 2, 8]} intensity={0.7}/>
+
+<mesh>
+  <torusGeometry/>
+  <MeshWobbleMaterial factor={1} speed={100} />
+</mesh>
+ 
+
+  </>
+  )
+}
+export default MyElement3D
+```
+
+## meshDistortMaterial
+```javascript
+import { MeshDistortMaterial, OrbitControls} from "@react-three/drei"
+
+
+function MyElement3D(){
+
+  
+  
+  return(
+
+  <>
+  <OrbitControls />
+  <ambientLight intensitiy={0.2} />
+  <directionalLight position={[0, 1, 0]}/>
+  <directionalLight position={[1, 2, 8]} intensity={0.7}/>
+
+<mesh>
+  <torusGeometry/>
+  <MeshDistortMaterial distort={0.23} speed={1} />
+</mesh>
+ 
+
+  </>
+  )
+}
+export default MyElement3D
+```
+
+## MeshDiscardMaterial
+```javascript
+import { MeshDiscardMaterial, OrbitControls} from "@react-three/drei"
+
+
+function MyElement3D(){
+
+  
+  
+  return(
+
+  <>
+  <OrbitControls />
+  <ambientLight intensitiy={0.2} />
+  <directionalLight position={[0, 1, 0]}/>
+  <directionalLight position={[1, 2, 8]} intensity={0.7}/>
+
+<mesh>
+  <torusGeometry/>
+  <MeshDiscardMaterial/>
+</mesh>
+ 
+
+  </>
+  )
+}
+export default MyElement3D
+```
+
+## shadermaterial
+```
+import { MeshDiscardMaterial, OrbitControls, shaderMaterial} from "@react-three/drei"
+import * as THREE from "three"
+import {extend} from "@react-three/fiber"
+
+const SimpleMaterial = new shaderMaterial({
+uColor:new THREE.Color(1,0,0)
+}, 
+`
+varying vec2 vUv;
+void main(){
+  vUv = uv;
+  gl_Position=projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}
+`,`
+uniform vec3 uColor;
+varying vec2 vUv;
+void main(){
+  gl_FragColor = vec4(vUv.y * uColor, 1.0)
+}`
+
+
+)
+extend({SimpleMaterial})
+function MyElement3D(){
+
+  
+  
+  return(
+
+  <>
+  <OrbitControls />
+  <ambientLight intensitiy={0.2} />
+  <directionalLight position={[0, 1, 0]}/>
+  <directionalLight position={[1, 2, 8]} intensity={0.7}/>
+
+<mesh>
+  <boxGeometry/>
+  <simpleMaterial uColor={"green"}/>
+</mesh>
+ 
+
+  </>
+  )
+}
+export default MyElement3D
+```
