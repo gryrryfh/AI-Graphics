@@ -8,9 +8,8 @@
 ![image](https://github.com/gryrryfh/AI-Graphics/assets/50912987/c72cd30a-9250-4a58-b14e-96e04e7c5921)
 
 
-## HelloWorld
+## HelloTriangle 변경점    
 
-## HelloTriangle 변경점  
   
 #### 파이프라인에 대한 루트 시그니처 정의, 생성  
 ```c++
@@ -81,6 +80,10 @@ shaders.hlsl파일에서 정점 셰이더와 픽셀 셰이더를 로드하여 �
 그래픽 파이프라인 상태 객체 생성, 리소스 준비, 랜더링 명령어 추가
 
 
+
+
+
+        
 ## HelloTexture 변경점  
 
 #### 텍스처를 사용하기 위해 셰이더 리소스 뷰 힙 생성
