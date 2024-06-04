@@ -1,3 +1,5 @@
+### 출처 : https://learn.microsoft.com/en-us/samples/microsoft/directx-graphics-samples/d3d12-hello-world-samples-win32/
+
 ## HelloWorld
 ![image](https://github.com/gryrryfh/AI-Graphics/assets/50912987/0230e167-b1f2-4e6e-98f6-2dfaba50c68a)
 
